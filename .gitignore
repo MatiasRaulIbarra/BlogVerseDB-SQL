@@ -54,7 +54,9 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-*.vs/
+.vs/
 *.dbmdl
 *.jfm
 *.publish.xml
+*.sqlproj
+*.user
