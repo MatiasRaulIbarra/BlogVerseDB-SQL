@@ -25,6 +25,8 @@ bld/
 
 # .NET Core
 project.lock.json
+
+
 project.fragment.lock.json
 artifacts/
 
@@ -52,3 +54,6 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+*.vs/
+*.dbmdl
+*.jfm
