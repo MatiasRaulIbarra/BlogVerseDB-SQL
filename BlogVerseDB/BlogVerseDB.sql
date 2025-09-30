@@ -23,3 +23,8 @@ CREATE TABLE Comments (Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                        PostId UNIQUEIDENTIFIER,
                        CreateAt DATETIME2,
                        UpdateAt DATETIME2);
+
+CREATE TABLE Roles(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
+                    Name  NVARCHAR(50));
+CREATE TABLE UserRoles(UserId UNIQUEIDENTIFIER,
+                       RoleId UNIQUEIDENTIFIER);
