@@ -16,3 +16,10 @@ CREATE TABLE Post(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                   CreatedAt DATETIME2,
                   UpdatedAt DATETIME2,
                   Published bit);
+
+CREATE TABLE Comments (Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
+                       Content NVARCHAR(MAX),
+                       AuthorId UNIQUEIDENTIFIER,
+                       PostId UNIQUEIDENTIFIER,
+                       CreateAt DATETIME2,
+                       UpdateAt DATETIME2);
