@@ -12,10 +12,11 @@ CREATE TABLE Users(Id  UNIQUEIDENTIFIER NOT NULL  PRIMARY KEY DEFAULT NEWID() ,
 CREATE TABLE Post(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                   Title NVARCHAR(200),
                   Content NVARCHAR(MAX),
-                  AuthorId UNIQUEIDENTIFIER,
+                  AuthorId UNIQUEIDENTIFIER NOT NULL,
                   CreatedAt DATETIME2,
                   UpdatedAt DATETIME2,
-                  Published BIT NULL DEFAULT 1,);
+                  Published BIT NULL DEFAULT 1,
+                  CONSTRAINT FK_Posts_Users FOREIGN KEY(AuthorId) REFERENCES Users(Id) );
 
 CREATE TABLE Comments (Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                        Content NVARCHAR(MAX),
