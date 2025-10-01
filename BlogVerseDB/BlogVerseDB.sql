@@ -7,7 +7,7 @@ CREATE TABLE Users(Id  UNIQUEIDENTIFIER NOT NULL  PRIMARY KEY DEFAULT NEWID() ,
                    Bio NVARCHAR(500),
                    CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
                    UpdatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-                   IsActive BIT);
+                   );
 
 CREATE TABLE Post(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                   Title NVARCHAR(200),
@@ -36,3 +36,9 @@ CREATE TABLE UserRoles(UserId UNIQUEIDENTIFIER NOT NULL,
                        CONSTRAINT PK_UsersRoles PRIMARY KEY (UserId,RoleId),
                        CONSTRAINT PK_Users_Roles FOREIGN KEY (UserId) REFERENCES Users(Id),
                        CONSTRAINT PK_Roles_Users FOREIGN KEY(RolesId) REFERENCES Posts(Id));
+
+
+-- Insert initial test data into Users table
+INSERT INTO Users (Username, Email) VALUES ('Matias', 'matias.test@blog.com');
+INSERT INTO Users (Username, Email) VALUES ('Juan', 'juan.test@blog.com');
+INSERT INTO Users (Username, Email) VALUES ('Pedro', 'pedro.test@blog.com')
