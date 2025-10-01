@@ -23,10 +23,16 @@ CREATE TABLE Comments (Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                        AuthorId UNIQUEIDENTIFIER,
                        PostId UNIQUEIDENTIFIER NOT NULL,
                        CreateAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-                       UpdateAt DATETIME2 NOT NULL DEFAULT SYSDATETIME);
+                       UpdateAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+                       CONSTRAINT FK_Comments_Users FOREIGN KEY(AuthorId) REFERENCES Users(Id),
+                       CONSTRAINT FK_Comments_Posts FOREIGN KEY(PostId) REFERENCES Posts(Id)
+                       );
 
 CREATE TABLE Roles(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                     Name  NVARCHAR(50) NOT NULL UNIQUE);
 
 CREATE TABLE UserRoles(UserId UNIQUEIDENTIFIER NOT NULL,
-                       RoleId UNIQUEIDENTIFIER NOT NULL);
+                       RoleId UNIQUEIDENTIFIER NOT NULL,
+                       CONSTRAINT PK_UsersRoles PRIMARY KEY (UserId,RoleId),
+                       CONSTRAINT PK_Users_Roles FOREIGN KEY (UserId) REFERENCES Users(Id),
+                       CONSTRAINT PK_Roles_Users FOREIGN KEY(RolesId) REFERENCES Posts(Id));
