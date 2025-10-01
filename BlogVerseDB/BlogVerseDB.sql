@@ -5,8 +5,8 @@ CREATE TABLE Users(Id  UNIQUEIDENTIFIER NOT NULL  PRIMARY KEY DEFAULT NEWID() ,
                    Email NVARCHAR(100),
                    PassWordHash NVARCHAR(255),
                    Bio NVARCHAR(500),
-                   CreatedAt DATETIME2,
-                   UpdatedAt DATETIME2,
+                   CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+                   UpdatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
                    IsActive BIT);
 
 CREATE TABLE Post(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
@@ -15,16 +15,17 @@ CREATE TABLE Post(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                   AuthorId UNIQUEIDENTIFIER,
                   CreatedAt DATETIME2,
                   UpdatedAt DATETIME2,
-                  Published bit);
+                  Published BIT NULL DEFAULT 1,);
 
 CREATE TABLE Comments (Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
                        Content NVARCHAR(MAX),
                        AuthorId UNIQUEIDENTIFIER,
-                       PostId UNIQUEIDENTIFIER,
-                       CreateAt DATETIME2,
-                       UpdateAt DATETIME2);
+                       PostId UNIQUEIDENTIFIER NOT NULL,
+                       CreateAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+                       UpdateAt DATETIME2 NOT NULL DEFAULT SYSDATETIME);
 
 CREATE TABLE Roles(Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
-                    Name  NVARCHAR(50));
-CREATE TABLE UserRoles(UserId UNIQUEIDENTIFIER,
-                       RoleId UNIQUEIDENTIFIER);
+                    Name  NVARCHAR(50) NOT NULL UNIQUE);
+
+CREATE TABLE UserRoles(UserId UNIQUEIDENTIFIER NOT NULL,
+                       RoleId UNIQUEIDENTIFIER NOT NULL);
