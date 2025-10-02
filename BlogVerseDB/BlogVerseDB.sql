@@ -47,3 +47,17 @@ INSERT INTO Users (Username, Email) VALUES ('Pedro', 'pedro.test@blog.com');
 INSERT INTO Posts(Id,Title,AuthorId) VALUES('b23fa8d1-7a4c-43c1-b549-a258fccf8801','Programming','76af12c8-629b-4d16-8916-1240f39bde7b');
 INSERT INTO Posts(Id,Title,AuthorId) VALUES('4e2a1f09-5721-491e-9111-0f1dcb333280','Data Analyst','a8ab3259-294a-4af9-a775-bc21fc74d654');
 INSERT INTO Posts(Id,Title,AuthorId) VALUES('98c79646-ec28-4759-8b94-162784b70676','Data Science','4a7a48c6-56a3-4bc4-9b96-58e1de604592');
+
+--Queries in SQL Server 
+SELECT * FROM Users ORDER BY Username;
+
+--POST TABLE 
+SELECT COUNT(Username) AS TOTAL FROM Users;
+SELECT * FROM Posts WHERE AuthorId = '76AF12C8-629B-4D16-8916-1240F39BDE7B';
+
+
+--INNER JOIN  between Users and posts
+
+SELECT * FROM Users
+INNER JOIN Posts
+ON Users.Id = Posts.AuthorId;
