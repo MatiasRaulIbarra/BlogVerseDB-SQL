@@ -61,3 +61,23 @@ SELECT * FROM Posts WHERE AuthorId = '76AF12C8-629B-4D16-8916-1240F39BDE7B';
 SELECT * FROM Users
 INNER JOIN Posts
 ON Users.Id = Posts.AuthorId;
+
+--LEFT JOIN between Post + comments post 
+
+SELECT 
+    p.Id AS PostId,
+    p.Title,
+    p.Content,
+    p.CreatedAt,
+    u.Username AS Author,
+    COUNT(c.Id) AS CommentCount
+FROM Posts p
+LEFT JOIN Users u ON p.AuthorId = u.Id
+LEFT JOIN Comments c ON p.Id = c.PostId
+GROUP BY 
+    p.Id, 
+    p.Title, 
+    p.Content, 
+    p.CreatedAt, 
+    u.Username
+ORDER BY p.CreatedAt DESC;
