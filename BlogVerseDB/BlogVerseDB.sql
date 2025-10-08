@@ -81,3 +81,15 @@ GROUP BY
     p.CreatedAt, 
     u.Username
 ORDER BY p.CreatedAt DESC;
+
+--TOTAL OF POST BY USERS
+SELECT 
+u.Username,
+COUNT(p.Id) AS TotalPost
+FROM Users  u
+LEFT  JOIN 
+Posts p ON u.Id = p.AuthorId
+GROUP BY
+u.Username
+ORDER BY
+TotalPost DESC;
