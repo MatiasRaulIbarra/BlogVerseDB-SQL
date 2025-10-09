@@ -93,3 +93,15 @@ GROUP BY
 u.Username
 ORDER BY
 TotalPost DESC;
+
+--
+
+SELECT 
+    u.Username,
+    COUNT(p.Id) AS TotalPosts
+FROM 
+    Users u
+LEFT JOIN 
+    Posts p ON u.Id = p.AuthorId
+GROUP BY 
+    u.Username;
