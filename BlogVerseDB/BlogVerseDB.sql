@@ -105,3 +105,25 @@ LEFT JOIN
     Posts p ON u.Id = p.AuthorId
 GROUP BY 
     u.Username;
+
+
+--View_PublishedPosts
+CREATE VIEW View_PublishedPosts
+AS
+SELECT 
+    p.Id AS PostId,
+    p.Title,
+    p.Content,
+    p.CreatedAt,
+    u.Username AS Author,
+    COUNT(c.Id) AS CommentCount
+FROM Posts p
+LEFT JOIN Users u ON p.AuthorId = u.Id
+LEFT JOIN Comments c ON p.Id = c.PostId
+WHERE p.Published = 1
+GROUP BY 
+    p.Id, 
+    p.Title, 
+    p.Content, 
+    p.CreatedAt, 
+    u.Username;
