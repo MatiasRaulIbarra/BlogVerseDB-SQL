@@ -127,3 +127,24 @@ GROUP BY
     p.Content, 
     p.CreatedAt, 
     u.Username;
+
+
+--
+CREATE FUNCTION fn_CountPostsByUser (@UserId UNIQUEIDENTIFIER)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalPosts INT;
+
+    SELECT @TotalPosts = COUNT(*)
+    FROM Posts
+    WHERE AuthorId = @UserId;
+
+    RETURN @TotalPosts;
+END;
+
+SELECT 
+    u.Username,
+    dbo.fn_CountPostsByUser(u.Id) AS TotalPosts
+FROM 
+    Users u;
