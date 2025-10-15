@@ -148,7 +148,7 @@ SELECT
     dbo.fn_CountPostsByUser(u.Id) AS TotalPosts
 FROM 
     Users u;
-
+--store procedure
 CREATE PROCEDURE sp_RegisterUser
     @Username NVARCHAR(50),
     @Email NVARCHAR(100),
