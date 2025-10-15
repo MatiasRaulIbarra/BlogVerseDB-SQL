@@ -148,3 +148,16 @@ SELECT
     dbo.fn_CountPostsByUser(u.Id) AS TotalPosts
 FROM 
     Users u;
+
+CREATE PROCEDURE sp_RegisterUser
+    @Username NVARCHAR(50),
+    @Email NVARCHAR(100),
+    @PasswordHash NVARCHAR(255),
+    @Bio NVARCHAR(500) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Users (Username, Email, PasswordHash, Bio, CreatedAt, UpdatedAt)
+    VALUES (@Username, @Email, @PasswordHash, @Bio, SYSDATETIME(), SYSDATETIME());
+END;
