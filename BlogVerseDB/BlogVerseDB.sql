@@ -161,3 +161,16 @@ BEGIN
     INSERT INTO Users (Username, Email, PasswordHash, Bio, CreatedAt, UpdatedAt)
     VALUES (@Username, @Email, @PasswordHash, @Bio, SYSDATETIME(), SYSDATETIME());
 END;
+
+--sp create post
+CREATE PROCEDURE sp_CreatePost
+    @Title NVARCHAR(200),
+    @Content NVARCHAR(MAX),
+    @AuthorId UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Posts (Title, Content, AuthorId, CreatedAt, UpdatedAt, Published)
+    VALUES (@Title, @Content, @AuthorId, SYSDATETIME(), SYSDATETIME(), 1);
+END;
