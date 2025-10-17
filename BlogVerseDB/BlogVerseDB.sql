@@ -174,3 +174,37 @@ BEGIN
     INSERT INTO Posts (Title, Content, AuthorId, CreatedAt, UpdatedAt, Published)
     VALUES (@Title, @Content, @AuthorId, SYSDATETIME(), SYSDATETIME(), 1);
 END;
+
+
+--
+CREATE PROCEDURE sp_CreatePostWithComment
+    @Title NVARCHAR(200),
+    @Content NVARCHAR(MAX),
+    @AuthorId UNIQUEIDENTIFIER,
+    @CommentContent NVARCHAR(MAX)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- 1️⃣ Insertar el post
+        DECLARE @PostId UNIQUEIDENTIFIER = NEWID();
+
+        INSERT INTO Posts (Id, Title, Content, AuthorId, CreatedAt, UpdatedAt, Published)
+        VALUES (@PostId, @Title, @Content, @AuthorId, SYSDATETIME(), SYSDATETIME(), 1);
+
+        -- 2️⃣ Insertar el comentario para ese post
+        INSERT INTO Comments (Id, PostId, AuthorId, Content, CreateAt, UpdateAt)
+        VALUES (NEWID(), @PostId, @AuthorId, @CommentContent, SYSDATETIME(), SYSDATETIME());
+
+        -- 3️⃣ Confirmar la transacción
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        -- Si algo falla, deshacer todo
+        ROLLBACK TRANSACTION;
+        THROW;  -- Lanza el error para manejo externo
+    END CATCH
+END;
