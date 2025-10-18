@@ -208,3 +208,17 @@ BEGIN
         THROW;  -- Lanza el error para manejo externo
     END CATCH
 END;
+
+--Posts.Title
+SELECT * FROM Posts WHERE Title LIKE '%tutorial%';
+
+
+
+CREATE INDEX IX_Posts_Title
+ON Posts (Title);
+
+--Comments.PostId
+SELECT * FROM Comments WHERE PostId = @PostId;
+
+CREATE INDEX IX_Comments_PostId
+ON Comments (PostId);
