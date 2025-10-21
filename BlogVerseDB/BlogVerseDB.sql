@@ -222,3 +222,17 @@ SELECT * FROM Comments WHERE PostId = @PostId;
 
 CREATE INDEX IX_Comments_PostId
 ON Comments (PostId);
+
+--
+SELECT 
+    u.Username,
+    COUNT(p.Id) AS TotalPosts
+FROM 
+    Users u
+LEFT JOIN 
+    Posts p ON u.Id = p.AuthorId
+GROUP BY 
+    u.Username;
+
+    SELECT * FROM Posts WHERE Title LIKE '%sql%';
+CREATE INDEX IX_Posts_Title ON Posts(Title);
