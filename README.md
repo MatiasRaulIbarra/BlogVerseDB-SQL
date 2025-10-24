@@ -3,6 +3,7 @@
 BlogVerseDB is a SQL Server database designed for a blogging platform.  
 It follows normalization principles and includes key database concepts such as:
 
+
 - **Stored Procedures** for user registration, post creation, and comments.
 - **User-Defined Functions** (e.g., `fn_CountPostsByUser`) to calculate user statistics.
 - **Transactions** to ensure atomic operations (e.g., create post + comment).
